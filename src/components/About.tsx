@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
-  Html, 
-  Css, 
-  Javascript, 
-  React as ReactIcon, 
-  NodeJs, 
-  Git, 
+  Code, 
+  FileJson, 
+  FileType, 
+  SquareCode, 
+  Server, 
+  GitBranch,
   Figma 
 } from 'lucide-react';
 
@@ -107,12 +107,12 @@ const About = () => {
             >
               <h4 className="text-lg font-medium mb-4">Technologies I work with:</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                <SkillItem icon={<Html size={40} />} name="HTML" />
-                <SkillItem icon={<Css size={40} />} name="CSS" />
-                <SkillItem icon={<Javascript size={40} />} name="JavaScript" />
-                <SkillItem icon={<ReactIcon size={40} />} name="React" />
-                <SkillItem icon={<NodeJs size={40} />} name="Node.js" />
-                <SkillItem icon={<Git size={40} />} name="Git" />
+                <SkillItem icon={<Code size={40} />} name="HTML" />
+                <SkillItem icon={<FileJson size={40} />} name="CSS" />
+                <SkillItem icon={<FileType size={40} />} name="JavaScript" />
+                <SkillItem icon={<SquareCode size={40} />} name="React" />
+                <SkillItem icon={<Server size={40} />} name="Node.js" />
+                <SkillItem icon={<GitBranch size={40} />} name="Git" />
                 <SkillItem icon={<Figma size={40} />} name="Figma" />
               </div>
             </motion.div>
