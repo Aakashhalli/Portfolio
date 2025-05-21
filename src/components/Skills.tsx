@@ -2,7 +2,6 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Progress } from "@/components/ui/progress";
 import {
   Code,
   FileJson,
@@ -78,7 +77,7 @@ const Skills = () => {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
           >
             {skills.map((skill, index) => (
-              <SkillCircle 
+              <SkillCard 
                 key={index} 
                 skill={skill} 
                 delay={index * 0.1}
@@ -101,7 +100,10 @@ const Skills = () => {
               <motion.div 
                 key={index} 
                 className="flex flex-col items-center text-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)"
+                }}
               >
                 <div className="h-12 w-12 rounded-full bg-secondary/20 flex items-center justify-center mb-3">
                   <CheckIcon className="h-6 w-6 text-secondary" />
@@ -116,7 +118,7 @@ const Skills = () => {
   );
 };
 
-const SkillCircle = ({ 
+const SkillCard = ({ 
   skill, 
   delay 
 }: { 
@@ -127,52 +129,41 @@ const SkillCircle = ({
     <motion.div 
       className="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300"
       whileHover={{ 
-        y: -5,
-        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+        y: -10,
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
       }}
     >
-      <div className="relative h-36 w-36 flex items-center justify-center mb-4">
-        {/* Outer circle background */}
-        <div className="absolute h-36 w-36 rounded-full border-8 border-gray-100"></div>
-        
-        {/* Progress circle */}
-        <svg className="absolute h-36 w-36" viewBox="0 0 100 100">
-          <circle 
-            cx="50" 
-            cy="50" 
-            r="40" 
-            fill="none" 
-            stroke="#e6e6e6" 
-            strokeWidth="8" 
-          />
-          <motion.circle 
-            cx="50" 
-            cy="50" 
-            r="40" 
-            fill="none" 
-            stroke="rgb(172, 255, 231)" /* This should match the secondary color */
-            strokeWidth="8" 
+      <div className="hex-progress-container mb-5 relative">
+        <div className="hex-background">
+          <HexagonIcon className="w-28 h-28 text-gray-100" />
+        </div>
+        <div className="hex-icon absolute inset-0 flex items-center justify-center">
+          {skill.icon}
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-2xl font-bold">{skill.level}%</span>
+        </div>
+        <svg className="absolute inset-0" width="112" height="112" viewBox="0 0 112 112">
+          <defs>
+            <linearGradient id={`gradient-${skill.name}`} x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgb(172, 255, 231)" />
+              <stop offset="100%" stopColor="rgb(100, 223, 223)" />
+            </linearGradient>
+          </defs>
+          <motion.path
+            d="M56,8 L98,36 L98,76 L56,104 L14,76 L14,36 Z"
+            fill="none"
+            stroke={`url(#gradient-${skill.name})`}
+            strokeWidth="4"
             strokeLinecap="round"
-            strokeDasharray={`${2 * Math.PI * 40}`}
-            strokeDashoffset={`${2 * Math.PI * 40 * (1 - skill.level/100)}`}
-            initial={{ strokeDashoffset: `${2 * Math.PI * 40}` }}
-            animate={{ strokeDashoffset: `${2 * Math.PI * 40 * (1 - skill.level/100)}` }}
+            strokeLinejoin="round"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: skill.level / 100 }}
             transition={{ duration: 1.5, delay }}
           />
         </svg>
-        
-        {/* Skill icon and percentage */}
-        <div className="flex flex-col items-center justify-center z-10">
-          <div className="text-4xl font-bold text-primary">
-            {skill.level}%
-          </div>
-          <div className="mt-1 text-secondary">
-            {skill.icon}
-          </div>
-        </div>
       </div>
-      
-      <h3 className="text-xl font-medium text-primary">{skill.name}</h3>
+      <h3 className="text-xl font-medium text-primary mt-4">{skill.name}</h3>
     </motion.div>
   );
 };
@@ -185,6 +176,16 @@ const CheckIcon = ({ className }: { className: string }) => (
     stroke="currentColor"
   >
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+  </svg>
+);
+
+const HexagonIcon = ({ className }: { className: string }) => (
+  <svg 
+    className={className} 
+    viewBox="0 0 24 24" 
+    fill="currentColor"
+  >
+    <path d="M21,16.5c0,0.38-0.21,0.71-0.53,0.88l-7.9,4.44c-0.16,0.12-0.36,0.18-0.57,0.18c-0.21,0-0.41-0.06-0.57-0.18l-7.9-4.44 C3.21,17.21,3,16.88,3,16.5v-9c0-0.38,0.21-0.71,0.53-0.88l7.9-4.44c0.16-0.12,0.36-0.18,0.57-0.18c0.21,0,0.41,0.06,0.57,0.18 l7.9,4.44C20.79,6.79,21,7.12,21,7.5V16.5z" />
   </svg>
 );
 
