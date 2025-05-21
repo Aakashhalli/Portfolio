@@ -1,11 +1,11 @@
-
-import { useEffect } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Projects from '@/components/Projects';
 import Skills from '@/components/Skills';
+import Hackathons from '@/components/Hackathons';
 import Connect from '@/components/Connect';
 import Footer from '@/components/Footer';
 
@@ -19,6 +19,7 @@ const Index = () => {
   const aboutRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
   const skillsRef = useRef<HTMLDivElement>(null);
+  const hackathonsRef = useRef<HTMLDivElement>(null);
   const connectRef = useRef<HTMLDivElement>(null);
 
   // Track scroll position to determine active section
@@ -32,6 +33,7 @@ const Index = () => {
         { id: 'about', position: aboutRef.current?.offsetTop || 0 },
         { id: 'projects', position: projectsRef.current?.offsetTop || 0 },
         { id: 'skills', position: skillsRef.current?.offsetTop || 0 },
+        { id: 'hackathons', position: hackathonsRef.current?.offsetTop || 0 },
         { id: 'connect', position: connectRef.current?.offsetTop || 0 },
       ];
       
@@ -83,6 +85,7 @@ const Index = () => {
                 <NavItem href="#about" active={activeSection === 'about'}>About</NavItem>
                 <NavItem href="#projects" active={activeSection === 'projects'}>Projects</NavItem>
                 <NavItem href="#skills" active={activeSection === 'skills'}>Skills</NavItem>
+                <NavItem href="#hackathons" active={activeSection === 'hackathons'}>Hackathons</NavItem>
                 <NavItem href="#connect" active={activeSection === 'connect'}>Connect</NavItem>
               </ul>
             </nav>
@@ -119,6 +122,9 @@ const Index = () => {
         <div ref={skillsRef}>
           <Skills />
         </div>
+        <div ref={hackathonsRef}>
+          <Hackathons />
+        </div>
         <div ref={connectRef}>
           <Connect />
         </div>
@@ -132,9 +138,7 @@ const Index = () => {
   );
 };
 
-// Add missing imports and components
-import { useState, useRef } from 'react';
-
+// Keep existing NavItem component
 const NavItem = ({ 
   href, 
   children, 
@@ -165,6 +169,7 @@ const NavItem = ({
   );
 };
 
+// Keep existing ScrollToTopButton component
 const ScrollToTopButton = () => {
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
