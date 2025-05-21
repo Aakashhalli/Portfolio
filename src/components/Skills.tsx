@@ -2,14 +2,23 @@
 import { useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { Progress } from "@/components/ui/progress";
+import {
+  Code,
+  FileJson,
+  FileType,
+  SquareCode,
+  Server,
+  GitBranch
+} from 'lucide-react';
 
 const skills = [
-  { name: "HTML/CSS", level: 90 },
-  { name: "JavaScript", level: 85 },
-  { name: "React", level: 80 },
-  { name: "Node.js", level: 75 },
-  { name: "UI/UX Design", level: 70 },
-  { name: "Python", level: 65 }
+  { name: "HTML/CSS", level: 90, icon: <Code className="h-5 w-5" /> },
+  { name: "JavaScript", level: 85, icon: <FileType className="h-5 w-5" /> },
+  { name: "React", level: 80, icon: <SquareCode className="h-5 w-5" /> },
+  { name: "Node.js", level: 75, icon: <Server className="h-5 w-5" /> },
+  { name: "UI/UX Design", level: 70, icon: <FileJson className="h-5 w-5" /> },
+  { name: "Version Control", level: 65, icon: <GitBranch className="h-5 w-5" /> }
 ];
 
 const Skills = () => {
@@ -64,20 +73,22 @@ const Skills = () => {
             </p>
           </motion.div>
 
-          <div className="grid gap-6">
+          <motion.div 
+            variants={itemVariants}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16"
+          >
             {skills.map((skill, index) => (
-              <SkillBar 
+              <SkillCircle 
                 key={index} 
                 skill={skill} 
-                variants={itemVariants}
                 delay={index * 0.1}
               />
             ))}
-          </div>
+          </motion.div>
 
           <motion.div 
             variants={itemVariants}
-            className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8"
+            className="mt-12 grid grid-cols-2 md:grid-cols-3 gap-8"
           >
             {[
               "Responsive Design", 
@@ -105,29 +116,63 @@ const Skills = () => {
   );
 };
 
-const SkillBar = ({ 
+const SkillCircle = ({ 
   skill, 
-  variants,
   delay 
 }: { 
-  skill: { name: string; level: number }; 
-  variants: any;
+  skill: { name: string; level: number; icon: React.ReactNode }; 
   delay: number;
 }) => {
   return (
-    <motion.div variants={variants} className="mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="font-medium">{skill.name}</span>
-        <span className="text-gray-500">{skill.level}%</span>
+    <motion.div 
+      className="flex flex-col items-center bg-white p-6 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300"
+      whileHover={{ 
+        y: -5,
+        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+      }}
+    >
+      <div className="relative h-36 w-36 flex items-center justify-center mb-4">
+        {/* Outer circle background */}
+        <div className="absolute h-36 w-36 rounded-full border-8 border-gray-100"></div>
+        
+        {/* Progress circle */}
+        <svg className="absolute h-36 w-36" viewBox="0 0 100 100">
+          <circle 
+            cx="50" 
+            cy="50" 
+            r="40" 
+            fill="none" 
+            stroke="#e6e6e6" 
+            strokeWidth="8" 
+          />
+          <motion.circle 
+            cx="50" 
+            cy="50" 
+            r="40" 
+            fill="none" 
+            stroke="rgb(172, 255, 231)" /* This should match the secondary color */
+            strokeWidth="8" 
+            strokeLinecap="round"
+            strokeDasharray={`${2 * Math.PI * 40}`}
+            strokeDashoffset={`${2 * Math.PI * 40 * (1 - skill.level/100)}`}
+            initial={{ strokeDashoffset: `${2 * Math.PI * 40}` }}
+            animate={{ strokeDashoffset: `${2 * Math.PI * 40 * (1 - skill.level/100)}` }}
+            transition={{ duration: 1.5, delay }}
+          />
+        </svg>
+        
+        {/* Skill icon and percentage */}
+        <div className="flex flex-col items-center justify-center z-10">
+          <div className="text-4xl font-bold text-primary">
+            {skill.level}%
+          </div>
+          <div className="mt-1 text-secondary">
+            {skill.icon}
+          </div>
+        </div>
       </div>
-      <div className="h-2.5 bg-gray-200 rounded-full overflow-hidden">
-        <motion.div 
-          className="h-full bg-secondary rounded-full"
-          initial={{ width: 0 }}
-          animate={{ width: `${skill.level}%` }}
-          transition={{ duration: 1, delay: delay + 0.3, ease: "easeInOut" }}
-        ></motion.div>
-      </div>
+      
+      <h3 className="text-xl font-medium text-primary">{skill.name}</h3>
     </motion.div>
   );
 };
