@@ -1,17 +1,21 @@
-
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-white py-8 border-t border-gray-200">
       <div className="max-w-6xl mx-auto px-6 md:px-12 lg:px-24">
-        <div className="flex flex-col md:flex-row justify-between items-center">
+        {/* <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <p className="text-gray-600">&copy; 2025 Akash Halli. All rights reserved.</p>
+            <p className="text-gray-600">
+              &copy; 2025 Akash Halli. All rights reserved.
+            </p>
           </div>
-          
+
           <div className="flex space-x-4">
-            <SocialLink href="mailto:akash.halli@example.com" aria-label="Email">
+            <SocialLink
+              href="mailto:akashhallidev@gmail.com"
+              aria-label="Email"
+            >
               <Mail className="h-5 w-5" />
             </SocialLink>
             <SocialLink href="https://github.com" aria-label="GitHub">
@@ -24,25 +28,28 @@ const Footer = () => {
               <Twitter className="h-5 w-5" />
             </SocialLink>
           </div>
-        </div>
-        
-        <div className="mt-6 text-center text-gray-500 text-sm">
-          <p>"Creativity is intelligence having fun." - Albert Einstein</p>
+        </div> */}
+
+        <div className="text-center text-gray-500 text-sm">
+          <p>
+            "Engineering is not just a career; it's the art of turning ideas
+            into reality."
+          </p>
         </div>
       </div>
     </footer>
   );
 };
 
-const SocialLink = ({ 
-  href, 
+const SocialLink = ({
+  href,
   children,
   ...props
-}: React.AnchorHTMLAttributes<HTMLAnchorElement> & { 
-  children: React.ReactNode 
+}: React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+  children: React.ReactNode;
 }) => {
   return (
-    <a 
+    <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
