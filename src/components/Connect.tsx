@@ -7,7 +7,7 @@ import { useInView } from "react-intersection-observer";
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
 import { databases } from "../config/appwriteConfig";
 import { toast } from "sonner";
-
+import { Client } from "appwrite";
 const Connect = () => {
   const controls = useAnimation();
   const [ref, inView] = useInView({
@@ -40,6 +40,10 @@ const Connect = () => {
       },
     },
   };
+  const client = new Client();
+  client
+    .setEndpoint("https://fra.cloud.appwrite.io/v1")
+    .setProject("682ffe8400340dc2bd67");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

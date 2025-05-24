@@ -13,8 +13,8 @@ const Index = () => {
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
   const [activeSection, setActiveSection] = useState("hero");
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // Add useRef hooks for each section
   const heroRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const projectsRef = useRef<HTMLDivElement>(null);
@@ -22,12 +22,9 @@ const Index = () => {
   const hackathonsRef = useRef<HTMLDivElement>(null);
   const connectRef = useRef<HTMLDivElement>(null);
 
-  // Track scroll position to determine active section
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 200; // Offset for header
-
-      // Get section positions
+      const scrollPosition = window.scrollY + 200;
       const sections = [
         { id: "hero", position: heroRef.current?.offsetTop || 0 },
         { id: "about", position: aboutRef.current?.offsetTop || 0 },
@@ -36,8 +33,6 @@ const Index = () => {
         { id: "hackathons", position: hackathonsRef.current?.offsetTop || 0 },
         { id: "connect", position: connectRef.current?.offsetTop || 0 },
       ];
-
-      // Find the current active section
       for (let i = sections.length - 1; i >= 0; i--) {
         if (scrollPosition >= sections[i].position) {
           setActiveSection(sections[i].id);
@@ -45,12 +40,10 @@ const Index = () => {
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track scroll position to show/hide the header
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
     if (latest > previous && latest > 150) {
@@ -65,9 +58,12 @@ const Index = () => {
     visible: { y: 0, opacity: 1 },
   };
 
+  const handleMenuItemClick = () => {
+    setMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen">
-      {/* Navigation Header */}
       <motion.header
         variants={headerVariants}
         animate={visible ? "visible" : "hidden"}
@@ -88,9 +84,6 @@ const Index = () => {
                 <NavItem href="#projects" active={activeSection === "projects"}>
                   Projects
                 </NavItem>
-                {/* <NavItem href="#skills" active={activeSection === "skills"}>
-                  Skills
-                </NavItem> */}
                 <NavItem
                   href="#hackathons"
                   active={activeSection === "hackathons"}
@@ -116,7 +109,10 @@ const Index = () => {
               </a>
             </Button>
 
-            <button className="md:hidden">
+            <button
+              className="md:hidden"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -134,9 +130,54 @@ const Index = () => {
             </button>
           </div>
         </div>
+
+        {menuOpen && (
+          <div className="md:hidden px-6 pb-4">
+            <ul className="flex flex-col space-y-2">
+              <NavItem
+                href="#about"
+                active={activeSection === "about"}
+                onClick={handleMenuItemClick}
+              >
+                About
+              </NavItem>
+              <NavItem
+                href="#projects"
+                active={activeSection === "projects"}
+                onClick={handleMenuItemClick}
+              >
+                Projects
+              </NavItem>
+              <NavItem
+                href="#hackathons"
+                active={activeSection === "hackathons"}
+                onClick={handleMenuItemClick}
+              >
+                Hackathons
+              </NavItem>
+              <NavItem
+                href="#connect"
+                active={activeSection === "connect"}
+                onClick={handleMenuItemClick}
+              >
+                Connect
+              </NavItem>
+              <li>
+                <a
+                  href="/Akash_Halli_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-secondary font-medium"
+                  onClick={handleMenuItemClick}
+                >
+                  Resume
+                </a>
+              </li>
+            </ul>
+          </div>
+        )}
       </motion.header>
 
-      {/* Main Content */}
       <main>
         <div ref={heroRef}>
           <Hero />
@@ -157,62 +198,52 @@ const Index = () => {
       </main>
 
       <Footer />
-
-      {/* Scroll to top button */}
       <ScrollToTopButton />
     </div>
   );
 };
 
-// Keep existing NavItem component
 const NavItem = ({
   href,
   children,
   active,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
   active: boolean;
-}) => {
-  return (
-    <li>
-      <a
-        href={href}
-        className={`relative text-gray-600 hover:text-secondary transition-colors duration-300 py-2 ${
-          active ? "text-secondary" : ""
-        }`}
-      >
-        {children}
-        {active && (
-          <motion.span
-            layoutId="activeSection"
-            className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary"
-            transition={{ type: "spring", duration: 0.5 }}
-          />
-        )}
-      </a>
-    </li>
-  );
-};
+  onClick?: () => void;
+}) => (
+  <li>
+    <a
+      href={href}
+      onClick={onClick}
+      className={`relative block text-gray-600 hover:text-secondary transition-colors duration-300 py-2 ${
+        active ? "text-secondary font-semibold" : ""
+      }`}
+    >
+      {children}
+      {active && (
+        <motion.span
+          layoutId="activeSection"
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-secondary"
+          transition={{ type: "spring", duration: 0.5 }}
+        />
+      )}
+    </a>
+  </li>
+);
 
-// Keep existing ScrollToTopButton component
 const ScrollToTopButton = () => {
   const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > 400) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
+    setVisible(latest > 400);
   });
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -220,10 +251,7 @@ const ScrollToTopButton = () => {
       onClick={scrollToTop}
       className="fixed bottom-6 right-6 h-12 w-12 bg-secondary text-white rounded-full shadow-lg flex items-center justify-center z-40"
       initial={{ opacity: 0, scale: 0 }}
-      animate={{
-        opacity: visible ? 1 : 0,
-        scale: visible ? 1 : 0,
-      }}
+      animate={{ opacity: visible ? 1 : 0, scale: visible ? 1 : 0 }}
       transition={{ duration: 0.3 }}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}

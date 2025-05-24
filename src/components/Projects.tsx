@@ -157,7 +157,7 @@ const ProjectCard = ({
   return (
     <motion.div
       variants={variants}
-      className="project-card group relative grid grid-cols-1 lg:grid-cols-12 gap-8 rounded-2xl overflow-hidden pl-7 p-6 items-center"
+      className="project-card group relative grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 rounded-2xl overflow-hidden px-4 sm:px-6 lg:px-7 py-6 items-center max-w-full"
     >
       {/* Project Image */}
       <Card
@@ -200,7 +200,7 @@ const ProjectCard = ({
         <motion.img
           src={project.image}
           alt={project.title}
-          className="w-full  object-cover object-center "
+          className="w-full h-auto max-w-full object-cover object-center "
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.7, ease: [0.33, 1, 0.68, 1] }}
         />
