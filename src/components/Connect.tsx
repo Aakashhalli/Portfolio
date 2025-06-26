@@ -176,7 +176,7 @@ const Connect = () => {
                     <div>
                       <h4 className="font-medium">Email</h4>
                       <a
-                        href="mailto:akash.halli@example.com"
+                        href="mailto:akashhallidev@gmail.com"
                         className="text-gray-600 hover:text-secondary transition-colors"
                       >
                         akashhallidev@gmail.com

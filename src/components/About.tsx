@@ -135,7 +135,7 @@ const About = () => {
                   "MongoDB",
                   "GitHub",
                   "Postman",
-                  "ATmega32 Microcontroller",
+                  "ATmega32",
                 ].map((skill, index) => (
                   <li key={index} className="flex items-center">
                     <svg

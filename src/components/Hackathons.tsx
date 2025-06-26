@@ -203,88 +203,89 @@ const Hackathons = () => {
       {/* Project Details Dialog */}
       {selectedProject && (
         <Dialog open={!!selectedProject} onOpenChange={handleCloseProject}>
-          <DialogContent className="max-w-3xl overflow-y-auto max-h-[90vh]">
-            <DialogHeader>
-              <DialogTitle className="flex items-center text-2xl font-bold">
-                <span className="text-secondary mr-2">
-                  <Award className="inline-block w-6 h-6 mr-2" />
-                </span>
-                {selectedProject.title}
-                {selectedProject.achievement && (
-                  <span className="ml-4 text-sm px-3 py-1 bg-secondary/10 text-secondary text-center rounded-full">
-                    {selectedProject.achievement}
-                  </span>
-                )}
-              </DialogTitle>
-            </DialogHeader>
+          <DialogContent className="max-w-3xl p-0 overflow-hidden rounded-2xl text-justify">
+            <div className="max-h-[90vh] overflow-y-auto custom-scrollbar p-8">
+              <DialogHeader>
+                <DialogTitle className="flex items-center flex-col text-3xl font-bold">
+                  {selectedProject.title}
+                  {selectedProject.achievement && (
+                    <span className="text-sm px-3 py-1 bg-secondary/10 text-secondary text-center rounded-full m-2">
+                      <span className="text-secondary mr-2">
+                        <Award className="inline-block w-6 h-6" />
+                      </span>
+                      {selectedProject.achievement}
+                    </span>
+                  )}
+                </DialogTitle>
+              </DialogHeader>
 
-            <div className="mt-4 space-y-6">
-              {/* Image Gallery with Navigation */}
-              <div className="relative rounded-xl overflow-hidden aspect-video bg-gray-100">
-                <img
-                  src={selectedProject.gallery[currentImageIndex]}
-                  alt={`${selectedProject.title} screenshot ${
-                    currentImageIndex + 1
-                  }`}
-                  className="w-full h-full object-cover object-center"
-                />
+              <div className="space-y-6">
+                {/* Image Gallery with Navigation */}
+                <div className="relative rounded-xl overflow-hidden aspect-video bg-gray-100">
+                  <img
+                    src={selectedProject.gallery[currentImageIndex]}
+                    alt={`${selectedProject.title} screenshot ${
+                      currentImageIndex + 1
+                    }`}
+                    className="w-full h-full object-cover object-center"
+                  />
 
-                {/* Image Navigation */}
-                <div className="absolute inset-0 flex items-center justify-between px-4">
-                  <Button
-                    onClick={handlePrevImage}
-                    size="icon"
-                    variant="ghost"
-                    className="h-10 w-10 rounded-full bg-black/30 hover:bg-secondary text-white"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-chevron-left"
+                  {/* Image Navigation */}
+                  <div className="absolute inset-0 flex items-center justify-between px-4">
+                    <Button
+                      onClick={handlePrevImage}
+                      size="icon"
+                      variant="ghost"
+                      className="h-10 w-10 rounded-full bg-black/30 hover:bg-secondary text-white"
                     >
-                      <path d="m15 18-6-6 6-6" />
-                    </svg>
-                    <span className="sr-only">Previous</span>
-                  </Button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-chevron-left"
+                      >
+                        <path d="m15 18-6-6 6-6" />
+                      </svg>
+                      <span className="sr-only">Previous</span>
+                    </Button>
 
-                  <Button
-                    onClick={handleNextImage}
-                    size="icon"
-                    variant="ghost"
-                    className="h-10 w-10 rounded-full bg-black/30 hover:bg-secondary text-white"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-chevron-right"
+                    <Button
+                      onClick={handleNextImage}
+                      size="icon"
+                      variant="ghost"
+                      className="h-10 w-10 rounded-full bg-black/30 hover:bg-secondary text-white"
                     >
-                      <path d="m9 18 6-6-6-6" />
-                    </svg>
-                    <span className="sr-only">Next</span>
-                  </Button>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-chevron-right"
+                      >
+                        <path d="m9 18 6-6-6-6" />
+                      </svg>
+                      <span className="sr-only">Next</span>
+                    </Button>
+                  </div>
+
+                  {/* Image Counter */}
+                  <div className="absolute bottom-3 right-3 bg-black/50 text-white px-2 py-1 rounded text-sm">
+                    {currentImageIndex + 1} / {selectedProject.gallery.length}
+                  </div>
                 </div>
 
-                {/* Image Counter */}
-                <div className="absolute bottom-3 right-3 bg-black/50 text-white px-2 py-1 rounded text-sm">
-                  {currentImageIndex + 1} / {selectedProject.gallery.length}
-                </div>
-              </div>
-
-              {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                 <div className="flex items-center">
                   <Calendar className="w-5 h-5 mr-2 text-secondary" />
                   <span className="text-gray-700">{selectedProject.date}</span>
@@ -301,54 +302,55 @@ const Hackathons = () => {
                 </div>
               </div> */}
 
-              <div>
-                <h3 className="text-lg font-medium mb-2">Description</h3>
-                <p className="text-gray-700">{selectedProject.description}</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Challenge</h3>
-                  <p className="text-gray-700">{selectedProject.challenge}</p>
+                  <h3 className="text-lg font-medium mb-2">Description</h3>
+                  <p className="text-gray-700">{selectedProject.description}</p>
                 </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <h3 className="text-lg font-medium mb-2">Challenge</h3>
+                    <p className="text-gray-700">{selectedProject.challenge}</p>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-medium mb-2">Solution</h3>
+                    <p className="text-gray-700">{selectedProject.solution}</p>
+                  </div>
+                </div>
+
                 <div>
-                  <h3 className="text-lg font-medium mb-2">Solution</h3>
-                  <p className="text-gray-700">{selectedProject.solution}</p>
+                  <h3 className="text-lg font-medium mb-2">Technologies</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.technologies.map((tech, i) => (
+                      <span
+                        key={i}
+                        className="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                      >
+                        <Code className="w-3.5 h-3.5 mr-1 text-secondary" />
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <h3 className="text-lg font-medium mb-2">Technologies</h3>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.technologies.map((tech, i) => (
-                    <span
-                      key={i}
-                      className="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                {selectedProject.link && (
+                  <div className="flex justify-center pt-4">
+                    <Button
+                      asChild
+                      className="bg-secondary text-primary hover:bg-secondary/90"
                     >
-                      <Code className="w-3.5 h-3.5 mr-1 text-secondary" />
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                      <a
+                        href={selectedProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2"
+                      >
+                        Visit Project <ExternalLink className="w-4 h-4" />
+                      </a>
+                    </Button>
+                  </div>
+                )}
               </div>
-
-              {selectedProject.link && (
-                <div className="flex justify-center pt-4">
-                  <Button
-                    asChild
-                    className="bg-secondary text-primary hover:bg-secondary/90"
-                  >
-                    <a
-                      href={selectedProject.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2"
-                    >
-                      Visit Project <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </Button>
-                </div>
-              )}
             </div>
           </DialogContent>
         </Dialog>
@@ -373,7 +375,7 @@ const HackathonCard = ({
       transition={{ type: "spring", stiffness: 300, damping: 15 }}
       className="h-full"
     >
-      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col border border-gray-200">
+      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col border border-gray-200 text-j">
         <div className="relative h-48 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 flex items-end">
             <div className="p-4 text-white">
@@ -391,7 +393,7 @@ const HackathonCard = ({
           />
         </div>
         <span className="inline-flex items-center px-2 py-1 text-xs rounded-sm h-16 bg-secondary/90 text-primary font-medium mt-4 mx-4">
-          <Award className="w-3 h-3 mr-1" />
+          <Award className="w-3 h-3 mr-1 min-w-4" />
           {project.achievement}
         </span>
         <CardContent className="flex-grow flex flex-col p-5">
