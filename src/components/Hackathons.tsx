@@ -209,8 +209,8 @@ const Hackathons = () => {
                 <DialogTitle className="flex items-center flex-col text-3xl font-bold">
                   {selectedProject.title}
                   {selectedProject.achievement && (
-                    <span className="text-sm px-3 py-1 bg-secondary/10 text-secondary text-center rounded-full m-2">
-                      <span className="text-secondary mr-2">
+                    <span className="text-sm px-3 py-1 bg-secondary/10 text-secondary text-center rounded-full mt-2">
+                      <span className="text-secondary">
                         <Award className="inline-block w-6 h-6" />
                       </span>
                       {selectedProject.achievement}
@@ -375,7 +375,7 @@ const HackathonCard = ({
       transition={{ type: "spring", stiffness: 300, damping: 15 }}
       className="h-full"
     >
-      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col border border-gray-200 text-j">
+      <Card className="h-full overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col border border-gray-200 ">
         <div className="relative h-48 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 flex items-end">
             <div className="p-4 text-white">
@@ -400,7 +400,7 @@ const HackathonCard = ({
           <h3 className="text-xl font-bold mb-2 text-primary">
             {project.title}
           </h3>
-          <p className="text-gray-600 text-sm mb-4 flex-grow">
+          <p className="text-gray-600 text-sm mb-4 flex-grow text-justify">
             {project.description}
           </p>
 

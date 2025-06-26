@@ -230,7 +230,7 @@ const ProjectCard = ({
 
         <Card className="mb-6 group-hover:shadow-xl transition-all duration-300">
           <CardContent className="p-6">
-            <p className="text-gray-700">{project.description}</p>
+            <p className="text-gray-700 text-justify">{project.description}</p>
           </CardContent>
         </Card>
 
