@@ -191,7 +191,7 @@ const Connect = () => {
                     <div>
                       <h4 className="font-medium">LinkedIn</h4>
                       <a
-                        href="https://www.linkedin.com/in/akash-halli-3ab6aa231/"
+                        href="https://www.linkedin.com/in/akashhalli/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-600 hover:text-secondary transition-colors"

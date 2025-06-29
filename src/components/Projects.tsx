@@ -14,7 +14,7 @@ const projects = [
       "An interactive React.js application was created to illustrate graph traversal and shortest path algorithms such as Bellman-Ford and Dijkstra, adapted the application with an accessible user interface for students.",
     tech: ["React.js", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     image: "algovisual2.png",
-    github: "#",
+    github: "https://github.com/Aakashhalli/Algovisual",
     live: "#",
     timeline: "Jan 2023 - Mar 2023",
     role: "Full Stack Developer",
@@ -26,7 +26,7 @@ const projects = [
       "Hire-Al aims to bridge this gap by providing a unified, student-centered platform that integrates LLM-based learning, resume assistance, mock interviews, and career guidance, making placement prep smarter and more efficient.",
     tech: ["Gemini API", "React.js", "Typtescript", "Tailwind CSS"],
     image: "hireai.png",
-    github: "#",
+    github: "https://github.com/Aakashhalli/HireAI",
     live: "#",
     timeline: "Apr 2023 - Jun 2023",
     role: "Frontend Developer",
@@ -39,8 +39,8 @@ const projects = [
       "Research paper publication in 10th International Conference on Signal Processing and Communication (ICSC), Noida, India, 2025.",
     tech: ["CKD", "Exploratory Data Analysis", "Machine Learning"],
     image: "./eda.png",
-    github: "#",
-    live: "https://ieeexplore.ieee.org/abstract/document/10967962",
+    github: "https://ieeexplore.ieee.org/abstract/document/10967962",
+    live: "",
     timeline: "Jul 2023 - Sep 2023",
     role: "Lead Developer",
   },
@@ -167,7 +167,7 @@ const ProjectCard = ({
       >
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10 z-10 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
           <div className="flex gap-6 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
-            {/* <Button
+            <Button
               size="icon"
               className="rounded-full bg-white/20 backdrop-blur-sm border border-white/40 hover:bg-white/30 transform hover:scale-110 transition-all duration-300"
               asChild
@@ -178,9 +178,9 @@ const ProjectCard = ({
                 rel="noopener noreferrer"
                 aria-label="GitHub Repository"
               >
-                <Github className="w-5 h-5 text-white" />
+                <ExternalLink className="w-5 h-5 text-white" />
               </a>
-            </Button> */}
+            </Button>
             {/* <Button
               size="icon"
               className="rounded-full bg-white/20 backdrop-blur-sm border border-white/40 hover:bg-white/30 transform hover:scale-110 transition-all duration-300"

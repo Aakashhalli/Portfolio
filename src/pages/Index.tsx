@@ -101,7 +101,7 @@ const Index = () => {
               className="hidden md:flex bg-transparent border-2 border-secondary text-secondary hover:bg-secondary/10 hover:text-secondary transition duration-300"
             >
               <a
-                href="/Akash_Halli_Resume.pdf"
+                href="https://drive.google.com/file/d/1BJRcqJepdv4zTJSkOASjLiD6MOUgvB4p/view?usp=drive_link"
                 target="_blank"
                 rel="noopener noreferrer"
               >

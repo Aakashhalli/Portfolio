@@ -67,13 +67,13 @@ const hackathonProjects = [
       "Tailwind CSS",
       "MetaMask",
     ],
-    image: "hackathon2.png", // replace with actual project screenshot if available
+    image: "hackathon2.png",
     gallery: ["hackathon2.png", "hackathon2_2.png", "hackathon2_3.png"],
     challenge:
       "Designing a decentralized platform to securely prove and transfer ownership of digital assets, while maintaining scalability and ease of use.",
     solution:
       "Developed a full-stack DApp where digital assets are hashed with SHA, stored on-chain for integrity, and metadata managed via MongoDB. Integrated smart contracts and wallet interactions using Web3.js and MetaMask.",
-    link: "#", // add GitHub/demo link here
+    link: "https://github.com/Aakashhalli/CryptexVault-Nexus-2.0-Hackathon",
   },
   {
     id: 3,
@@ -94,13 +94,13 @@ const hackathonProjects = [
       "MongoDB",
       "Tailwind CSS",
     ],
-    image: "hackathon3.png", // replace with actual screenshot if available
+    image: "hackathon3.png",
     gallery: ["hackathon3.png", "hackathon3_3.png", "hackathon3_2.jpg"],
     challenge:
       "Preventing academic certificate fraud while enabling fast, reliable verification for institutions and employers.",
     solution:
       "Implemented blockchain-backed credential storage and QR code generation to allow instant verification and immutable record keeping. Users can scan and validate authenticity via the platform in real-time.",
-    link: "#", // add demo or GitHub repo link here
+    link: "https://github.com/Aakashhalli/CertifyTrust-Pleadies2025-Hackathon",
   },
 ];
 
